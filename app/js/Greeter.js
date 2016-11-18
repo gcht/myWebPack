@@ -1,5 +1,7 @@
 // Greeter.js
 
+
+/*
 //var config = require('./config.json');
 module.exports = function() {
 	var greet = document.createElement('div');
@@ -7,16 +9,15 @@ module.exports = function() {
 	greet.textContent = config.iuap;
 	return greet;
 };
+*/
 
 
 
 
-/*
-var config = require('./myjson.json');
+var config = require('../json/myjson.json');
 
 module.exports = function() {
   var greet = document.createElement('div');
-  greet.textContent = config.greetText;
+  greet.textContent = config.iuap;
   return greet;
 };
-*/

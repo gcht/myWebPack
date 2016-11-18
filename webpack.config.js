@@ -1,8 +1,9 @@
+
 path = require('path')
 console.log(__dirname)
 module.exports = {
 	devtool: 'eval-source-map',//配置生成source Maps，选择合适的选项
-	entry:  __dirname + "/app/main.js",//已多次提及的唯一入口文件
+	entry:  __dirname + "/app/js/main.js",//已多次提及的唯一入口文件
 	output: {
 		path: __dirname + "/public",//打包后的文件存放的地方
 		filename: "bundle.js"//打包后输出文件的文件名
@@ -14,20 +15,32 @@ module.exports = {
 			path.join(__dirname)
 		],
 		modulesDirectories:['node_modules', path.join(__dirname, '../node_modules')],
-		extensions:['','.web.js','.js','.json']
+		extensions:['','.web.js','.js','.json','.css','.scss']
 	},
 	
 	module: {//在配置文件里添加JSON loader
 		loaders: [{
 			test: /\.json$/,
 			loader: "json"
-		}, {
+		},{
+			test: /\.css$/, 
+			loader: "style!css"
+		},{
 			test: /\.js$/,
 			exclude: /node_modules/,
 			loader: 'babel',//在webpack的module部分的loaders里进行配置即可
 			query: {
 				presets: ['es2015','react']
 			}
+		},{
+			test: require.resolve("./app/js/shim.js"),  
+			loader: "exports?shim"
+		}, { 
+			test: /\.(png|jpg)$/, 
+			loader: 'url-loader?limit=8192'
+		},{ 
+			test: /\.scss$/, 
+			loader: 'style!css!sass?sourceMap'
 		}]
 	},
   
